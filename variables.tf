@@ -6,6 +6,10 @@ variable "vultr_api_key" {
   description = "The API Key to authenticate with Vultr's API."
 }
 
+variable "ssh_key_path" {
+  type = string
+}
+
 
 ################################################################################
 # vultr_server irc_bridge variables
@@ -83,5 +87,13 @@ variable "vultr_firewall_irc_bridge_firewall_rule_https_port" {
 }
 
 variable "vultr_firewall_irc_bridge_firewall_rule_https_network" {
+  type = string
+}
+
+
+################################################################################
+# irc_bridge_ssh_key variables
+################################################################################
+variable "vultr_ssh_key_irc_bridge_ssh_key_name" {
   type = string
 }

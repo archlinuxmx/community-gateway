@@ -11,4 +11,5 @@ resource "vultr_server" "irc_bridge" {
   ddos_protection   = var.irc_bridge_ddos_protection
   notify_activate   = var.irc_bridge_notify_activate
   firewall_group_id = var.irc_bridge_firewall_group_id
+  ssh_key_ids       = [var.irc_bridge_ssh_public_key_id]
 }
