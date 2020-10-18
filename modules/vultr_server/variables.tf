@@ -1,6 +1,18 @@
 ################################################################################
 # vultr_server module variables
 ################################################################################
+variable "irc_bridge_firewall_group_id" {
+  type = string
+}
+
+variable "irc_bridge_ssh_public_key_id" {
+  type = string
+}
+
+variable "irc_bridge_ssh_private_key_path" {
+  type = string
+}
+
 variable "irc_bridge_plan_id" {
   type = string
 }
@@ -43,8 +55,4 @@ variable "irc_bridge_ddos_protection" {
 
 variable "irc_bridge_notify_activate" {
   type = bool
-}
-
-variable "irc_bridge_firewall_group_id" {
-  type = string
 }
