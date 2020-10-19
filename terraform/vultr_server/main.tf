@@ -1,7 +1,7 @@
 resource "vultr_server" "irc_bridge" {
   plan_id           = var.irc_bridge_plan_id
   region_id         = var.irc_bridge_region_id
-  iso_id            = var.irc_bridge_iso_id
+  os_id             = var.irc_bridge_os_id
   label             = var.irc_bridge_label
   tag               = var.irc_bridge_tag
   hostname          = var.irc_bridge_hostname
@@ -11,5 +11,7 @@ resource "vultr_server" "irc_bridge" {
   ddos_protection   = var.irc_bridge_ddos_protection
   notify_activate   = var.irc_bridge_notify_activate
   firewall_group_id = var.irc_bridge_firewall_group_id
-  ssh_key_ids       = [var.irc_bridge_ssh_public_key_id]
+  ssh_key_ids = [
+    var.irc_bridge_ssh_public_key_id
+  ]
 }

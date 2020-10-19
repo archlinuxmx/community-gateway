@@ -21,7 +21,7 @@ variable "irc_bridge_region_id" {
   type = string
 }
 
-variable "irc_bridge_iso_id" {
+variable "irc_bridge_os_id" {
   type = number
 }
 
