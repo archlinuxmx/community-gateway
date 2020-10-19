@@ -22,7 +22,7 @@ variable "vultr_server_irc_bridge_region_id" {
   type = string
 }
 
-variable "vultr_server_irc_bridge_iso_id" {
+variable "vultr_server_irc_bridge_os_id" {
   type = number
 }
 
