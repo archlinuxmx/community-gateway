@@ -1,16 +1,16 @@
+VARIABLES_FILE=variables.json
+
 create-variables:
-	cp variables/ansible_sample.json variables/ansible.json
-	cp variables/terraform_sample.json variables/terraform.json
-	cp variables/packer_sample.json variables/packer.json
+	test -f $(VARIABLES_FILE) || cp sample_variables.json $(VARIABLES_FILE)
 
 packer-build:
-	packer build -var-file=variables/packer.json packer/
+	packer build -var-file=$(VARIABLES_FILE) packer/
 
 terraform-init:
 	terraform init terraform/
 
 terraform-apply:
-	terraform apply -var-file=variables/terraform.json terraform/
+	terraform apply -var-file=$(VARIABLES_FILE) terraform/
 
 terraform-destroy:
-	terraform destroy -var-file=variables/terraform.json terraform/
+	terraform destroy -var-file=$(VARIABLES_FILE) terraform/
