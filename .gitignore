@@ -33,4 +33,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-variables.json
+# Ignore variables files
+variables/ansible.json
+variables/packer.json
+variables/terraform.json

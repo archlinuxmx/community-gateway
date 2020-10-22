@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+  become: yes
+  gather_facts: False
+
+  vars_files:
+  - /tmp/variables.json
+
+  tasks:
+  - name: Ensure the user is created
+    user:
+      name: "{{ user_name }}"
+      shell: "{{ user_shell }}"
+  - name: Ensure the user has sudo access
+    lineinfile:
+      path: /etc/sudoers.d/{{ user_name }}
+      line: "{{ user_name }}  ALL=(ALL)   ALL"
+      mode: "u=rw,g=r,o=r"
+      create: yes
+  - name: Ensure my public SSH keys are added to the user
+    authorized_key:
+      user: "{{ user_name }}"
+      state: present
+      key: "{{ public_ssh_keys_url }}"
+      path: /home/{{ user_name }}/.ssh/authorized_keys
+  - name: Ensure the user password is disabled and expired
+    command: "{{ item }}"
+    with_items:
+      - passwd -d {{ user_name }}
+      - passwd -e {{ user_name }}
+    changed_when: True
+  - name: Ensure the TOTP playbook is inside the user home folder
+    copy:
+      src: /tmp/totp.yml
+      dest: /home/{{ user_name }}/totp.yml
+      owner: "{{ user_name }}"
+      group: "{{ user_name }}"
+      mode: "0700"
+      remote_src: yes
