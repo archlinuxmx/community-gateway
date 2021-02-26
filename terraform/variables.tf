@@ -1,99 +1,80 @@
 ################################################################################
 # Project wide variables
 ################################################################################
-variable "vultr_api_key" {
+variable "linode_token" {
   type        = string
-  description = "The API Key to authenticate with Vultr's API."
+  description = "The API Key to authenticate with Linode's API."
 }
 
-variable "ssh_key_path" {
-  type = string
+variable "tags" {
+  type        = list(string)
+  description = "A list of tags applied to resources in this repository. Tags are for organizational purposes only."
+}
+
+################################################################################
+# linode_instance community_gateway variables
+################################################################################
+variable "linode_instance_community_gateway_label" {
+  type        = string
+  description = "The label to be displayed in Linode's servers"
+}
+
+variable "linode_instance_community_gateway_group" {
+  type        = string
+  description = "The display group of the Linode instance."
+}
+
+
+variable "linode_instance_community_gateway_image" {
+  type        = string
+  description = "The OS image used to deploy the instance"
+}
+
+variable "linode_instance_community_gateway_region" {
+  type        = string
+  description = "The Linode region where the instance is deployed"
+}
+
+variable "linode_instance_community_gateway_type" {
+  type        = string
+  description = "The Linode type of the instance"
+}
+
+variable "linode_instance_community_gateway_root_pass" {
+  type        = string
+  sensitive   = true
+  description = "The password for the root user"
+}
+
+variable "linode_instance_community_gateway_swap_size" {
+  type        = string
+  description = "The swap disk size of the instance"
+}
+
+variable "linode_instance_community_gateway_private_ip" {
+  type        = bool
+  description = "The private IP address for private networking"
 }
 
 
 ################################################################################
-# vultr_server irc_bridge variables
+# linode_sshkey community_gateway variables
 ################################################################################
-variable "vultr_server_irc_bridge_plan_id" {
-  type = string
+variable "linode_sshkey_community_gateway_label" {
+  type        = string
+  description = "The label of the SSH key that is attached to the instance"
 }
 
-variable "vultr_server_irc_bridge_region_id" {
-  type = string
-}
-
-variable "vultr_server_irc_bridge_os_id" {
-  type = number
-}
-
-variable "vultr_server_irc_bridge_label" {
-  type = string
-}
-
-variable "vultr_server_irc_bridge_tag" {
-  type = string
-}
-
-variable "vultr_server_irc_bridge_hostname" {
-  type = string
-}
-
-variable "vultr_server_irc_bridge_user_data" {
-  type = string
-}
-
-variable "vultr_server_irc_bridge_enable_ipv6" {
-  type = bool
-}
-
-variable "vultr_server_irc_bridge_auto_backup" {
-  type = bool
-}
-
-variable "vultr_server_irc_bridge_ddos_protection" {
-  type = bool
-}
-
-variable "vultr_server_irc_bridge_notify_activate" {
-  type = bool
+variable "linode_sshkey_community_gateway_key" {
+  type        = string
+  description = "The path to the SSH key that is attached to the instance"
 }
 
 
 ################################################################################
-# irc_bridge_firewall variables
+# linode_firewall community_gateway variables
 ################################################################################
-variable "vultr_firewall_group_irc_bridge_firewall_group_description" {
-  type = string
-}
-
-variable "vultr_firewall_irc_bridge_firewall_rule_ssh_port" {
-  type = string
-}
-
-variable "vultr_firewall_irc_bridge_firewall_rule_ssh_network" {
-  type = string
-}
-
-variable "vultr_firewall_irc_bridge_firewall_rule_irc_port" {
-  type = string
-}
-
-variable "vultr_firewall_irc_bridge_firewall_rule_irc_network" {
-  type = string
-}
-
-variable "vultr_firewall_irc_bridge_firewall_rule_https_port" {
-  type = string
-}
-
-variable "vultr_firewall_irc_bridge_firewall_rule_https_network" {
-  type = string
-}
-
-
-################################################################################
-# irc_bridge_ssh_key variables
-################################################################################
-variable "vultr_ssh_key_irc_bridge_ssh_key_name" {
-  type = string
+variable "linode_firewall_community_gateway_label" {
+  type        = string
+  description = "The label of the web application firewall"
 }
