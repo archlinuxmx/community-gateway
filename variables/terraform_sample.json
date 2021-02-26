@@ -1,23 +1,17 @@
 {
-    "vultr_api_key": "",
-    "ssh_key_path": "~/.ssh/id_ed25519",
-    "vultr_server_irc_bridge_plan_id": 201,
-    "vultr_server_irc_bridge_region_id": 2,
-    "vultr_server_irc_bridge_os_id": 362,
-    "vultr_server_irc_bridge_label": "irc-bridge",
-    "vultr_server_irc_bridge_tag": "irc-bridge",
-    "vultr_server_irc_bridge_hostname": "irc-bridge",
-    "vultr_server_irc_bridge_user_data": "",
-    "vultr_server_irc_bridge_enable_ipv6": false,
-    "vultr_server_irc_bridge_auto_backup": false,
-    "vultr_server_irc_bridge_ddos_protection": true,
-    "vultr_server_irc_bridge_notify_activate": true,
-    "vultr_firewall_group_irc_bridge_firewall_group_description": "IRC Bridge Firewall",
-    "vultr_firewall_irc_bridge_firewall_rule_ssh_port": 22,
-    "vultr_firewall_irc_bridge_firewall_rule_ssh_network": "0.0.0.0/0",
-    "vultr_firewall_irc_bridge_firewall_rule_irc_port": 6697,
-    "vultr_firewall_irc_bridge_firewall_rule_irc_network": "0.0.0.0/0",
-    "vultr_firewall_irc_bridge_firewall_rule_https_port": 443,
-    "vultr_firewall_irc_bridge_firewall_rule_https_network": "0.0.0.0/0",
-    "vultr_ssh_key_irc_bridge_ssh_key_name": "irc-bridge-key"
+    "linode_token": "",
+    "tags": [
+        "archlinux-mx",
+        "community-gateway"
+    ],
+    "linode_instance_community_gateway_label": "community_gateway",
+    "linode_instance_community_gateway_group": "community-gateway",
+    "linode_instance_community_gateway_image": "linode/arch",
+    "linode_instance_community_gateway_region": "us-central",
+    "linode_instance_community_gateway_type": "g6-nanode-1",
+    "linode_instance_community_gateway_swap_size": "256",
+    "linode_instance_community_gateway_private_ip": "true",
+    "linode_sshkey_community_gateway_label": "diyu",
+    "linode_sshkey_community_gateway_key": "~/.ssh/id_ed25519.pub",
+    "linode_firewall_community_gateway_label": "community_gateway"
 }

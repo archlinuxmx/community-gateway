@@ -1,52 +1,35 @@
 terraform {
   required_providers {
-    vultr = {
-      source = "vultr/vultr"
+    linode = {
+      source = "linode/linode"
     }
   }
-  required_version = ">= 0.13"
+  required_version = ">= 0.14"
 }
 
-provider "vultr" {
-  api_key = var.vultr_api_key
+provider "linode" {
+  token = var.linode_token
 }
 
-module "vultr_server" {
-  source = "./vultr_server"
+module "linode_instance" {
+  source = "./linode_instance"
 
-  irc_bridge_firewall_group_id = module.vultr_firewall.irc_bridge_firewall_group_id
-  irc_bridge_ssh_public_key_id = module.vultr_ssh_key.irc_bridge_ssh_key_id
+  linode_instance_community_gateway_authorized_keys = module.linode_sshkey.community_gateway_sshkey
 
-  irc_bridge_ssh_private_key_path = var.ssh_key_path
-
-  irc_bridge_plan_id         = var.vultr_server_irc_bridge_plan_id
-  irc_bridge_region_id       = var.vultr_server_irc_bridge_region_id
-  irc_bridge_os_id           = var.vultr_server_irc_bridge_os_id
-  irc_bridge_label           = var.vultr_server_irc_bridge_label
-  irc_bridge_tag             = var.vultr_server_irc_bridge_tag
-  irc_bridge_hostname        = var.vultr_server_irc_bridge_hostname
-  irc_bridge_user_data       = var.vultr_server_irc_bridge_user_data
-  irc_bridge_enable_ipv6     = var.vultr_server_irc_bridge_enable_ipv6
-  irc_bridge_auto_backup     = var.vultr_server_irc_bridge_auto_backup
-  irc_bridge_ddos_protection = var.vultr_server_irc_bridge_ddos_protection
-  irc_bridge_notify_activate = var.vultr_server_irc_bridge_notify_activate
+  tags                                         = var.tags
+  linode_instance_community_gateway_label      = var.linode_instance_community_gateway_label
+  linode_instance_community_gateway_group      = var.linode_instance_community_gateway_group
+  linode_instance_community_gateway_image      = var.linode_instance_community_gateway_image
+  linode_instance_community_gateway_region     = var.linode_instance_community_gateway_region
+  linode_instance_community_gateway_type       = var.linode_instance_community_gateway_type
+  linode_instance_community_gateway_root_pass  = var.linode_instance_community_gateway_root_pass
+  linode_instance_community_gateway_swap_size  = var.linode_instance_community_gateway_swap_size
+  linode_instance_community_gateway_private_ip = var.linode_instance_community_gateway_private_ip
 }
 
-module "vultr_firewall" {
-  source = "./vultr_firewall"
+module "linode_sshkey" {
+  source = "./linode_sshkey"
 
-  irc_bridge_firewall_group_description  = var.vultr_firewall_group_irc_bridge_firewall_group_description
-  irc_bridge_firewall_rule_ssh_port      = var.vultr_firewall_irc_bridge_firewall_rule_ssh_port
-  irc_bridge_firewall_rule_ssh_network   = var.vultr_firewall_irc_bridge_firewall_rule_ssh_network
-  irc_bridge_firewall_rule_irc_port      = var.vultr_firewall_irc_bridge_firewall_rule_irc_port
-  irc_bridge_firewall_rule_irc_network   = var.vultr_firewall_irc_bridge_firewall_rule_irc_network
-  irc_bridge_firewall_rule_https_port    = var.vultr_firewall_irc_bridge_firewall_rule_https_port
-  irc_bridge_firewall_rule_https_network = var.vultr_firewall_irc_bridge_firewall_rule_https_network
-}
-
-module "vultr_ssh_key" {
-  source = "./vultr_ssh_key"
-
-  irc_bridge_ssh_key_name        = var.vultr_ssh_key_irc_bridge_ssh_key_name
-  irc_bridge_ssh_public_key_path = "${var.ssh_key_path}.pub"
+  linode_sshkey_community_gateway_key   = var.linode_sshkey_community_gateway_key
+  linode_sshkey_community_gateway_label = var.linode_sshkey_community_gateway_label
 }
