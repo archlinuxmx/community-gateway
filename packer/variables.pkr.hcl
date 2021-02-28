@@ -36,10 +36,8 @@ variable "community_gateway_instance_label" {
 
 variable "community_gateway_instance_tags" {
   type        = list(string)
-  default     = [
-    "community_gateway", "archlinuxmx"
-  ]
-  description = "The tags to apply to the instance when it is created."
+  default     = ["community_gateway", "archlinuxmx"]
+  description = "The tags to apply to the image when it is created."
 }
 
 variable "community_gateway_swap_size" {

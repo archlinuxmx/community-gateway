@@ -2,6 +2,10 @@ variable "tags" {
   type = list(string)
 }
 
+variable "region" {
+  type = string
+}
+
 variable "linode_instance_community_gateway_group" {
   type = string
 }
@@ -11,10 +15,6 @@ variable "linode_instance_community_gateway_label" {
 }
 
 variable "linode_instance_community_gateway_image" {
-  type = string
-}
-
-variable "linode_instance_community_gateway_region" {
   type = string
 }
 
