@@ -12,7 +12,7 @@ create-variables: ## create variables files
 generate-docs: ## generate documentation for variables
 	@terraform-docs markdown terraform/ > README.md
 
-build: ## run the unit tests
+build: ## build the packer image
 	@packer build -var-file=variables/packer.json packer/
 
 init: ## generate documentation using pdoc
