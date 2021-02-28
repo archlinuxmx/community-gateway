@@ -6,20 +6,19 @@ help:
 
 create-variables: ## create variables files
 	@cp variables/ansible_sample.json variables/ansible.json
-	@cp variables/terraform_sample.json variables/terraform.json
-	@cp variables/packer_sample.json variables/packer.json
+	@cp variables/variables_sample.json variables/variables.json
 
 generate-docs: ## generate documentation for variables
 	@terraform-docs markdown terraform/ > README.md
 
 build: ## build the packer image
-	@packer build -var-file=variables/packer.json packer/
+	@packer build -var-file=variables/variables.json packer/
 
 init: ## generate documentation using pdoc
 	@terraform init terraform/
 
 apply: ## create infraestructure
-	@terraform apply -var-file=variables/terraform.json terraform/
+	@terraform apply -var-file=variables/variables.json terraform/
 
 destroy: ## destroy infrastructure
-	@terraform destroy -var-file=variables/terraform.json terraform/
+	@terraform destroy -var-file=variables/variables.json terraform/
