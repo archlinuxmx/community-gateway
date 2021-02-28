@@ -30,8 +30,8 @@ variable "community_gateway_instance_type" {
 
 variable "community_gateway_instance_label" {
   type        = string
-  default     = "community_gateway"
-  description = "The name assigned to the Linode Instance."
+  default     = "community_gateway_builder"
+  description = "The name assigned to the Linode Instance that builds the image."
 }
 
 variable "community_gateway_instance_tags" {

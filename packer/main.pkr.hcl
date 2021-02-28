@@ -24,4 +24,13 @@ build {
       "pacman -S ansible --noconfirm"
     ]
   }
+
+  provisioner "file"{
+    sources     = ["variables/ansible.json", "ansible/totp.yml"]
+    destination = "/tmp/"
+  }
+
+  provisioner "ansible-local" {
+    playbook_file   = "./ansible/user.yml"
+  }
 }
