@@ -1,37 +1,27 @@
-source "vultr" "irc_bridge" {
-  api_key              = var.vultr_api_key
-  os_id                = var.vultr_server_irc_bridge_os_id
-  plan_id              = var.vultr_server_irc_bridge_plan_id
-  region_id            = var.vultr_server_irc_bridge_region_id
-  snapshot_description = "Packer-test-with updates"
-  ssh_username         = "root"
-  state_timeout = "15m"
+source "linode" "community_gateway" {
+  linode_token      = var.linode_token
+  ssh_username      = var.ssh_username
+  image             = var.community_gateway_image
+  region            = var.community_gateway_region
+  instance_type     = var.community_gateway_instance_type
+  instance_label    = var.community_gateway_instance_label
+  instance_tags     = var.community_gateway_instance_tags
+  swap_size         = var.community_gateway_swap_size
+  image_label       = var.community_gateway_image_label
+  image_description = var.community_gateway_image_description
 }
 
 build {
+  name = "community_gateway"
+
   sources = [
-    "source.vultr.irc_bridge"
+    "source.linode.community_gateway"
   ]
-
-  provisioner "file"{
-    source = "variables/ansible.json"
-    destination = "/tmp/variables.json"
-  }
-
-  provisioner "file"{
-    source = "ansible/totp.yml"
-    destination = "/tmp/totp.yml"
-  }
 
   provisioner "shell" {
     inline = [
-      "sudo dnf install epel-release -y",
-      "sudo dnf makecache",
-      "sudo dnf install ansible -y"
+      "pacman -Syu --noconfirm",
+      "pacman -S ansible --noconfirm"
     ]
-  }
-
-  provisioner "ansible-local" {
-    playbook_file = "ansible/user.yml"
   }
 }
