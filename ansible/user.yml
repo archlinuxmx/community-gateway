@@ -4,7 +4,7 @@
   gather_facts: False
 
   vars_files:
-  - /tmp/variables.json
+  - /tmp/ansible.json
 
   tasks:
   - name: Ensure the user is created
