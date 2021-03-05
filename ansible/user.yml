@@ -35,5 +35,5 @@
       dest: /home/{{ user_name }}/totp.yml
       owner: "{{ user_name }}"
       group: "{{ user_name }}"
-      mode: "0700"
+      mode: "u=rwx"
       remote_src: yes

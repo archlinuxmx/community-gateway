@@ -20,17 +20,29 @@ build {
 
   provisioner "shell" {
     inline = [
+      # "pacman -S reflector --noconfirm",
+      # "reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist",
       "pacman -Syu --noconfirm",
       "pacman -S ansible --noconfirm"
     ]
   }
 
   provisioner "file"{
-    sources     = ["variables/ansible.json", "ansible/totp.yml"]
+    sources = [
+      "variables/ansible.json",
+      "ansible/totp.yml",
+      "ansible/packages.yml",
+      "ansible/templates/teleirc-env",
+      "ansible/templates/teleirc.service"
+    ]
     destination = "/tmp/"
   }
 
   provisioner "ansible-local" {
     playbook_file   = "./ansible/user.yml"
+  }
+
+  provisioner "ansible-local" {
+    playbook_file = "ansible/packages.yml"
   }
 }
