@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: archlinux
     steps:
     - uses: actions/checkout@v2
     - name: Lint Ansible Playbook
@@ -13,5 +13,5 @@ jobs:
         targets: "./"
         override-deps: |
           ansible==2.10
-          ansible-lint==4.2.0
+          ansible-lint==5.0
         args: ""
