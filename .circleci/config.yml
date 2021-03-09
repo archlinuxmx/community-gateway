@@ -1,10 +1,14 @@
 ---
 version: 2.1
+jobs:
+  first:
+    docker:
+      - image: archlinux-latest
+    steps:
+      - checkout
+      - run: echo "Hello world"
 workflows:
-  welcome:
-    first:
-      docker:
-        - image: archlinux-latest
-      steps:
-        - checkout
-        - run: echo "Hello world"
+  version: 2.1
+  community-gateway:
+    jobs:
+      - first
