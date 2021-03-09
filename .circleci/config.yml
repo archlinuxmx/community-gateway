@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   first:
     docker:
-      - image: archlinux-latest
+      - image: archlinux
     steps:
       - checkout
       - run: echo "Hello world"
