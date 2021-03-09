@@ -1,7 +1,7 @@
 ---
 name: Ansible Lint
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build:
@@ -15,3 +15,16 @@ jobs:
         override-deps: |
           ansible==2.10
           ansible-lint==5.0
+    - uses: hashicorp/setup-terraform@v1
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
