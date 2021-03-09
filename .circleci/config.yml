@@ -6,7 +6,8 @@ jobs:
       - image: archlinux
     steps:
       - checkout
-      - run: whoami
+      - run: pacman -Sy
+      - run: pacman -S ansible-lint --noconfirm
 workflows:
   version: 2.1
   community-gateway:
