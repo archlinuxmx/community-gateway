@@ -6,9 +6,10 @@ jobs:
       - image: archlinux
     steps:
       - checkout
-      - run: mkdir -p /var/lib/pacman/
-      - run: pacman -Sy
-      - run: pacman -S ansible-lint --noconfirm
+      - run: |
+          mkdir -p /var/lib/pacman/
+          pacman -Sy
+          pacman -S ansible-lint --noconfirm
 workflows:
   version: 2.1
   community-gateway:
