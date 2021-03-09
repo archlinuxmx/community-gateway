@@ -1,4 +1,6 @@
 source "linode" "community_gateway" {
+  ssh_clear_authorized_keys = true
+
   linode_token      = var.linode_token
   ssh_username      = var.ssh_username
   image             = var.community_gateway_image
@@ -20,29 +22,18 @@ build {
 
   provisioner "shell" {
     inline = [
-      # "pacman -S reflector --noconfirm",
-      # "reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist",
       "pacman -Syu --noconfirm",
       "pacman -S ansible --noconfirm"
     ]
   }
 
-  provisioner "file"{
-    sources = [
-      "variables/ansible.json",
-      "ansible/totp.yml",
+  provisioner "ansible-local" {
+    playbook_dir   = "ansible"
+    playbook_files = [
+      "ansible/user.yml",
       "ansible/packages.yml",
-      "ansible/templates/teleirc-env",
-      "ansible/templates/teleirc.service"
+      "ansible/hardening.yml"
     ]
-    destination = "/tmp/"
-  }
-
-  provisioner "ansible-local" {
-    playbook_file   = "./ansible/user.yml"
-  }
-
-  provisioner "ansible-local" {
-    playbook_file = "ansible/packages.yml"
+    galaxy_file = "ansible/requirements.yml"
   }
 }
