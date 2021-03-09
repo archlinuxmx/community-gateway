@@ -4,19 +4,21 @@
   gather_facts: False
 
   vars_files:
-  - /tmp/ansible.json
+  - vars/ansible.json
 
   tasks:
   - name: Ensure the list of dependencies is fulfilled
     pacman:
       name:
         - curl
+        - ebtables
         - emacs-nox
         - fail2ban
         - firewalld
         - git
         - go
         - iproute
+        - ipset
         - libpam-google-authenticator
         - qrencode
         - tmux
@@ -44,7 +46,7 @@
       mode: "u=rw,g=rx,o=rx"
   - name: Ensure the TeleIRC configuration is in place
     copy:
-      src: /tmp/teleirc-env
+      src: templates/teleirc-env.j2
       dest: /etc/teleirc/env
       owner: "{{ user_name }}"
       group: "{{ user_name }}"
@@ -52,7 +54,7 @@
       remote_src: yes
   - name: Ensure the TeleIRC SystemD service is in place
     copy:
-      src: /tmp/teleirc.service
+      src: files/teleirc.service
       dest: /etc/systemd/system/teleirc.service
       owner: "{{ user_name }}"
       group: "{{ user_name }}"
