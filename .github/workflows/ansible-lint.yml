@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: archlinux
+    runs-on: archlinux-latest
     steps:
     - uses: actions/checkout@v2
     - name: Lint Ansible Playbook
