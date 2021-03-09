@@ -45,7 +45,7 @@
       state: directory
       mode: "u=rw,g=rx,o=rx"
   - name: Ensure the TeleIRC configuration is in place
-    copy:
+    ansible.builtin.template:
       src: templates/teleirc-env.j2
       dest: /etc/teleirc/env
       owner: "{{ user_name }}"
@@ -53,8 +53,8 @@
       mode: "u=rw"
       remote_src: yes
   - name: Ensure the TeleIRC SystemD service is in place
-    copy:
-      src: files/teleirc.service
+    ansible.builtin.template:
+      src: templates/teleirc.service.j2
       dest: /etc/systemd/system/teleirc.service
       owner: "{{ user_name }}"
       group: "{{ user_name }}"

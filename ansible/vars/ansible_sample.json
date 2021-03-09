@@ -1,5 +1,13 @@
 {
     "user_name": "",
     "user_shell": "/bin/bash",
-    "public_ssh_keys_url": "https://github.com/da-edra.keys"
+    "public_ssh_keys_url": "https://github.com/da-edra.keys",
+    "irc_channel": "#archlinux-mx",
+    "irc_bot_name": "archlinuxmx-bot",
+    "irc_bot_realname": "Arch Linux MX bot, powered by TeleIRC <github.com/RITlug/teleirc>",
+    "irc_nickserv_user": "",
+    "irc_nickserv_pass": "",
+    "telegram_chat_id": "",
+    "teleirc_token": "",
+    "imgur_client_id": ""
 }

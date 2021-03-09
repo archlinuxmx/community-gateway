@@ -5,7 +5,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-User=teleirc
+User={{ user_name }}
 ExecStart=/usr/local/bin/teleirc -conf /etc/teleirc/env
 Restart=always
 RestartSec=60
