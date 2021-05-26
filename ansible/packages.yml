@@ -1,46 +1,43 @@
 ---
 - hosts: localhost
-  become: yes
-  gather_facts: False
+  become: true
+  gather_facts: false
 
   vars_files:
   - vars/ansible.json
 
   tasks:
   - name: Ensure the list of dependencies is fulfilled
-    pacman:
+    ansible.builtin.pacman:
       name:
         - curl
-        - ebtables
         - emacs-nox
-        - fail2ban
         - firewalld
         - git
         - go
-        - iproute
         - ipset
         - libpam-google-authenticator
         - qrencode
         - tmux
       state: present
   - name: Ensure the TeleIRC repository is cloned
-    git:
+    ansible.builtin.git:
       repo: git://github.com/RITlug/teleirc.git
       dest: /tmp/teleirc
   - name: Ensure the TeleIRC source files are compiled
-    command: go build cmd/teleirc.go
+    ansible.builtin.command: go build cmd/teleirc.go
     args:
       chdir: /tmp/teleirc
   - name: Ensure the TeleIRC binary is in place
-    copy:
+    ansible.builtin.copy:
       src: /tmp/teleirc/teleirc
       dest: /usr/local/bin/teleirc
       owner: "{{ user_name }}"
       group: "{{ user_name }}"
       mode: "u=rwx,g=rx,o=rx"
-      remote_src: yes
+      remote_src: true
   - name: Ensure the TeleIRC configuration directory is created
-    file:
+    ansible.builtin.file:
       path: /etc/teleirc
       state: directory
       mode: "u=rw,g=rx,o=rx"
@@ -51,7 +48,7 @@
       owner: "{{ user_name }}"
       group: "{{ user_name }}"
       mode: "u=rw"
-      remote_src: yes
+      remote_src: true
   - name: Ensure the TeleIRC SystemD service is in place
     ansible.builtin.template:
       src: templates/teleirc.service.j2
@@ -59,9 +56,9 @@
       owner: "{{ user_name }}"
       group: "{{ user_name }}"
       mode: "u=rw,g=r,o=r"
-      remote_src: yes
+      remote_src: true
   - name: Ensure the TeleIRC daemon is started and enabled
-    systemd:
+    ansible.builtin.systemd:
       name: teleirc.service
       state: started
-      enabled: yes
+      enabled: true

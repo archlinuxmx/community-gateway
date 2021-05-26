@@ -1,39 +1,39 @@
 ---
 - hosts: localhost
-  become: yes
-  gather_facts: False
+  become: true
+  gather_facts: false
 
   tasks:
   - name: Ensure keyboard-interactive:pam is added to AuthenticationMethdos
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: /etc/ssh/sshd_config
       regexp: '^AuthenticationMethods'
       line: AuthenticationMethods publickey keyboard-interactive:pam
   - name: Ensure ChallengeResponseAuthentication is enabled
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: /etc/ssh/sshd_config
       regexp: '^ChallengeResponseAuthentication'
       line: ChallengeResponseAuthentication yes
   - name: Ensure UsePAM is enabled
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: /etc/ssh/sshd_config
       line: UsePAM yes
       insertbefore: EOF
   - name: Ensure google_authenticator is added to PAM SSH
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: /etc/pam.d/sshd
       line: auth required pam_google_authenticator.so
       insertbefore: BOF
   - name: Ensure system-remote-login is disabled on PAM SSH
-    lineinfile:
+    ansible.builtin.lineinfile:
       path: /etc/pam.d/sshd
       regexp: '^auth      include   system-remote-login'
       line: '#auth      include   system-remote-login'
   - name: Ensure the SSH daemon is reloaded
-    systemd:
+    ansible.builtin.systemd:
       name: sshd
       state: reloaded
   - name: Ensure the SSH daemon is restarted
-    systemd:
+    ansible.builtin.systemd:
       name: sshd
       state: restarted
