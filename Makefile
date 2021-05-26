@@ -1,4 +1,4 @@
-.PHONY: help create-variables build init apply destroy
+.PHONY: help create-variables build init plan apply destroy
 .DEFAULT_GOAL := help
 
 help:
@@ -16,6 +16,9 @@ build: ## build the packer image
 
 init: ## generate documentation using pdoc
 	@terraform -chdir=terraform init
+
+plan: ## plan infraestructure
+	@terraform -chdir=terraform plan -var-file=../variables/variables.json
 
 apply: ## create infraestructure
 	@terraform -chdir=terraform apply -var-file=../variables/variables.json

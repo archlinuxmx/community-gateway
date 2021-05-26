@@ -47,12 +47,6 @@ variable "linode_instance_community_gateway_type" {
   description = "The Linode instance type that defines the pricing, CPU, disk, and RAM specs of the instance."
 }
 
-variable "linode_instance_community_gateway_root_pass" {
-  type        = string
-  sensitive   = true
-  description = "The password for the root user."
-}
-
 variable "linode_instance_community_gateway_swap_size" {
   type        = string
   default     = 512
